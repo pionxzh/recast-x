@@ -1,6 +1,6 @@
 {
-  "author": "Ben Newman <bn@cs.stanford.edu>",
-  "name": "recast",
+  "name": "recast-x",
+  "author": "Pionxzh",
   "version": "0.23.9",
   "description": "JavaScript syntax tree transformer, nondestructive pretty-printer, and automatic source map generator",
   "keywords": [
@@ -13,10 +13,10 @@
     "parsing",
     "pretty-printing"
   ],
-  "homepage": "http://github.com/benjamn/recast",
+  "homepage": "http://github.com/pionxzh/recast-x",
   "repository": {
     "type": "git",
-    "url": "git://github.com/benjamn/recast.git"
+    "url": "git://github.com/pionxzh/recast-x.git"
   },
   "license": "MIT",
   "main": "main.js",
