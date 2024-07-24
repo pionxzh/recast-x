@@ -8,7 +8,7 @@ import getBabelOptions, { Overrides } from "./_babel_options";
 //     parser: require("recast/parsers/typescript")
 //   });
 //
-export function parse(source: string, options?: Overrides) {
+export function parse(source: string, options?: Overrides): ReturnType<typeof parser.parse> {
   const babelOptions = getBabelOptions(options);
   babelOptions.plugins.push("typescript");
   return parser.parse(source, babelOptions);
