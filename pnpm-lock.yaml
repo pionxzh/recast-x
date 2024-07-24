@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   ast-types:
-    specifier: ^0.16.1
-    version: 0.16.1
+    specifier: npm:ast-types-x@1.16.1
+    version: /ast-types-x@1.16.1
   esprima:
     specifier: ~4.0.0
     version: 4.0.1
@@ -1632,8 +1632,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /ast-types@0.16.1:
-    resolution: {integrity: sha512-6t10qk83GOG8p0vKmaCr8eiilZwO171AvbROMtvvNiwrTly62t+7XkA8RdIIVbpMhCASAsxgAzdRSwh6nw/5Dg==}
+  /ast-types-x@1.16.1:
+    resolution: {integrity: sha512-QOErQhz/rDrkOXNLO9xEoMcAvbAkf7tSFJa6QOTb0cCtHl2k+jmRYBeNn/vm/WDBujM7omUHqIvEEh2ZJndNOg==}
     engines: {node: '>=4'}
     dependencies:
       tslib: 2.5.0
