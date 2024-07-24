@@ -4,12 +4,12 @@ import { getLineTerminator } from "./util";
  * All Recast API functions take second parameter with configuration options,
  * documented in options.js
  */
-export interface Options extends DeprecatedOptions {
+export interface Options {
   /**
    * If you want to use a different branch of esprima, or any other module
    * that supports a .parse function, pass that module object to
    * recast.parse as options.parser (legacy synonym: options.esprima).
-   * @default require("recast/parsers/esprima")
+   * @default require("recast/parsers/babel")
    */
   parser?: any;
 
@@ -159,13 +159,8 @@ export interface Options extends DeprecatedOptions {
   tokens?: boolean;
 }
 
-interface DeprecatedOptions {
-  /** @deprecated */
-  esprima?: any;
-}
-
 const defaults: Options = {
-  parser: require("../parsers/esprima"),
+  parser: require("../parsers/babel"),
   tabWidth: 4,
   useTabs: false,
   reuseWhitespace: true,
@@ -187,9 +182,7 @@ const defaults: Options = {
 };
 const hasOwn = defaults.hasOwnProperty;
 
-export type NormalizedOptions = Required<
-  Omit<Options, keyof DeprecatedOptions>
->;
+export type NormalizedOptions = Required<Options>;
 
 // Copy options and fill in default values.
 export function normalize(opts?: Options): NormalizedOptions {
@@ -209,7 +202,7 @@ export function normalize(opts?: Options): NormalizedOptions {
     sourceMapName: get("sourceMapName"),
     sourceRoot: get("sourceRoot"),
     inputSourceMap: get("inputSourceMap"),
-    parser: get("esprima") || get("parser"),
+    parser: get("parser"),
     range: get("range"),
     tolerant: get("tolerant"),
     quote: get("quote"),

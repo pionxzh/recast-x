@@ -37,11 +37,13 @@ export function parse(source: string, options?: Partial<Options>) {
   // tokenizer. All the preconfigured ../parsers/* expose ast.tokens
   // automatically, but custom parsers might need additional configuration
   // to avoid this fallback.
-  const tokens: any[] = Array.isArray(ast.tokens)
-    ? ast.tokens
-    : require("esprima").tokenize(sourceWithoutTabs, {
-        loc: true,
-      });
+  if (!Array.isArray(ast.tokens)) {
+    throw new Error(
+      "Missing required ast.tokens array. " +
+        "Please configure your parser to attach a tokens array to the AST "
+    );
+  }
+  const tokens: any[] = ast.tokens;
 
   // We will reattach the tokens array to the file object below.
   delete ast.tokens;
