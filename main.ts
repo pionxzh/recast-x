@@ -1,4 +1,3 @@
-import fs from "fs";
 import * as types from "ast-types";
 import { parse } from "./lib/parser";
 import { Printer } from "./lib/printer";
@@ -49,45 +48,4 @@ export function print(node: types.ASTNode, options?: Options) {
  */
 export function prettyPrint(node: types.ASTNode, options?: Options) {
   return new Printer(options).printGenerically(node);
-}
-
-/**
- * Convenient command-line interface (see e.g. example/add-braces).
- */
-export function run(transformer: Transformer, options?: RunOptions) {
-  return runFile(process.argv[2], transformer, options);
-}
-
-export interface Transformer {
-  (ast: types.ASTNode, callback: (ast: types.ASTNode) => void): void;
-}
-
-export interface RunOptions extends Options {
-  writeback?(code: string): void;
-}
-
-function runFile(path: any, transformer: Transformer, options?: RunOptions) {
-  fs.readFile(path, "utf-8", function (err, code) {
-    if (err) {
-      console.error(err);
-      return;
-    }
-
-    runString(code, transformer, options);
-  });
-}
-
-function defaultWriteback(output: string) {
-  process.stdout.write(output);
-}
-
-function runString(
-  code: string,
-  transformer: Transformer,
-  options?: RunOptions,
-) {
-  const writeback = (options && options.writeback) || defaultWriteback;
-  transformer(parse(code, options), function (node: any) {
-    writeback(print(node, options).code);
-  });
 }
