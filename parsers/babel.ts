@@ -9,13 +9,9 @@ export const parser = (function (): BabelParser {
   try {
     return require("@babel/parser");
   } catch {
-    try {
-      return require("babylon");
-    } catch {
-      throw new Error(
-        "Install @babel/parser to use the `typescript`, `flow`, or `babel` parsers",
-      );
-    }
+    throw new Error(
+      "Install @babel/parser to use the `typescript`, `flow`, or `babel` parsers",
+    );
   }
 })();
 
