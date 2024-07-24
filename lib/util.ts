@@ -162,11 +162,11 @@ function expandLoc(parentLoc: any, childLoc: any) {
 export function fixFaultyLocations(node: any, lines: any) {
   const loc = node.loc;
   if (loc) {
-    if (loc.start.line < 1) {
+    if (loc.start && loc.start.line < 1) {
       loc.start.line = 1;
     }
 
-    if (loc.end.line < 1) {
+    if (loc.end && loc.end.line < 1) {
       loc.end.line = 1;
     }
   }
