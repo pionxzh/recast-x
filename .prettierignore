@@ -7,3 +7,5 @@ test/data/
 /lib/**/*.js
 /parsers/**/*.js
 /test/**/*.js
+
+pnpm-lock.yaml

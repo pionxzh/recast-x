@@ -8,7 +8,10 @@ import getBabelOptions, { Overrides } from "./_babel_options";
 //     parser: require("recast/parsers/flow")
 //   });
 //
-export function parse(source: string, options?: Overrides): ReturnType<typeof parser.parse> {
+export function parse(
+  source: string,
+  options?: Overrides,
+): ReturnType<typeof parser.parse> {
   const babelOptions = getBabelOptions(options);
   babelOptions.plugins.push("jsx", "flow");
   return parser.parse(source, babelOptions);

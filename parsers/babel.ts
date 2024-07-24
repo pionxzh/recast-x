@@ -22,7 +22,10 @@ export const parser = (function (): BabelParser {
 //     parser: require("recast/parsers/babel")
 //   });
 //
-export function parse(source: string, options?: Overrides): ReturnType<typeof parser.parse> {
+export function parse(
+  source: string,
+  options?: Overrides,
+): ReturnType<typeof parser.parse> {
   const babelOptions = getBabelOptions(options);
   babelOptions.plugins.push("jsx", "flow", "decoratorAutoAccessors");
   return parser.parse(source, babelOptions);

@@ -3,6 +3,7 @@
 ---
 
 This is a fork with changes to make it slim.
+
 - Removed CLI interface
 - Removed `babylon` fallback
 - Default parser is `@babel/parser` instead of `esprima`

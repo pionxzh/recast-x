@@ -40,7 +40,7 @@ export function parse(source: string, options?: Partial<Options>) {
   if (!Array.isArray(ast.tokens)) {
     throw new Error(
       "Missing required ast.tokens array. " +
-        "Please configure your parser to attach a tokens array to the AST "
+        "Please configure your parser to attach a tokens array to the AST ",
     );
   }
   const tokens: any[] = ast.tokens;
