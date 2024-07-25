@@ -1403,7 +1403,8 @@ function genericPrintNoParens(path: any, options: any, print: any) {
       if (!namedTypes.MethodDefinition.check(n.definition)) parts.push(";");
       return concat(parts);
 
-    case "ClassProperty": {
+    case "ClassProperty":
+    case "PropertyDefinition": {
       if (n.declare) {
         parts.push("declare ");
       }
