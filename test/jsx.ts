@@ -90,7 +90,7 @@ it("should not remove trailing whitespaces", function () {
       `${eol}` +
       `  return (${eol}` +
       `    <div abc="app">hello {name}${eol}` +
-      `          </div>${eol}` +
+      `    </div>${eol}` +
       `  );${eol}` +
       "}",
   );
