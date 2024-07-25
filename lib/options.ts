@@ -160,7 +160,6 @@ export interface Options {
 }
 
 const defaults: Options = {
-  parser: require("../parsers/babel"),
   tabWidth: 4,
   useTabs: false,
   reuseWhitespace: true,
@@ -202,7 +201,7 @@ export function normalize(opts?: Options): NormalizedOptions {
     sourceMapName: get("sourceMapName"),
     sourceRoot: get("sourceRoot"),
     inputSourceMap: get("inputSourceMap"),
-    parser: get("parser"),
+    parser: get("parser") || require("../parsers/esprima"),
     range: get("range"),
     tolerant: get("tolerant"),
     quote: get("quote"),

@@ -6,15 +6,14 @@ This is a fork with changes to make it slim.
 
 - Removed CLI interface
 - Removed `babylon` fallback
-- Default parser is `@babel/parser` instead of `esprima`
 - Use patched version of `ast-types`([ast-type-x](https://github.com/pionxzh/ast-types-x)). They fixed some bugs, merged some PRs and added some features since the original repo is not actively maintained.
 
 ---
 
 1. to give (a metal object) a different form by melting it down and reshaping it.
-1. to form, fashion, or arrange again.
-1. to remodel or reconstruct (a literary work, document, sentence, etc.).
-1. to supply (a theater or opera work) with a new cast.
+2. to form, fashion, or arrange again.
+3. to remodel or reconstruct (a literary work, document, sentence, etc.).
+4. to supply (a theater or opera work) with a new cast.
 
 ## Installation
 
