@@ -25,6 +25,6 @@ then
     rm -rf graphql-tools
 fi
 
-cd .. # back to the recast/test/ directory
+cd ../.. # back to the root directory
 
-exec mocha --reporter spec --full-trace $@ run.js
+exec mocha --reporter spec --full-trace $@ test/run.js
