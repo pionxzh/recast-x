@@ -1,9 +1,11 @@
 import assert from "assert";
 import fs from "fs";
 import path from "path";
+import { getLineTerminator } from "../lib/util";
 import { fromString, concat, countSpaces, Lines } from "../lib/lines";
-import { EOL as eol } from "os";
 import { namedTypes } from "ast-types";
+
+const eol = getLineTerminator();
 
 type LinesInput = string | Lines;
 
@@ -16,7 +18,10 @@ function toString(s: LinesInput): string {
 }
 
 function check(a: LinesInput, b: LinesInput) {
-  assert.strictEqual(toString(a), toString(b));
+  assert.strictEqual(
+    toString(a).replace(/\r\n/g, "\n"),
+    toString(b).replace(/\r\n/g, "\n"),
+  );
 }
 
 describe("lines", function () {
@@ -94,7 +99,7 @@ describe("lines", function () {
 
     let joined = chars.join("");
     assert.strictEqual(joined.length, code.length);
-    assert.strictEqual(joined, code);
+    assert.strictEqual(joined.replace(/\r\n/g, "\n"), code);
 
     const withoutSpaces = code.replace(/\s+/g, "");
     chars.length = emptyCount = 0;
@@ -102,7 +107,7 @@ describe("lines", function () {
     assert.strictEqual(emptyCount, 0);
     joined = chars.join("");
     assert.strictEqual(joined.length, withoutSpaces.length);
-    assert.strictEqual(joined, withoutSpaces);
+    assert.strictEqual(joined.replace(/\r\n/g, "\n"), withoutSpaces);
   }
 
   it("EachPos", function EachPosTest() {

@@ -1,10 +1,12 @@
 import assert from "assert";
 import * as types from "ast-types";
 import fs from "fs";
-import { EOL as eol } from "os";
 import path from "path";
 import * as recast from "../main";
 import * as parser from "../parsers/typescript";
+import { getLineTerminator } from "../lib/util";
+
+const eol = getLineTerminator();
 
 describe("TypeScript", function () {
   it("basic printing", function () {

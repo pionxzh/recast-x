@@ -1,10 +1,12 @@
 import assert from "assert";
 import { parse } from "../lib/parser";
 import { Printer } from "../lib/printer";
+import { getLineTerminator } from "../lib/util";
 import * as types from "ast-types";
+
 const n = types.namedTypes;
 const b = types.builders;
-import { EOL as eol } from "os";
+const eol = getLineTerminator();
 
 describe("ES6 Compatability", function () {
   function convertShorthandMethod() {

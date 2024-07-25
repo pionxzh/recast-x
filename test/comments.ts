@@ -5,8 +5,10 @@ const n = recast.types.namedTypes;
 const b = recast.types.builders;
 import { Printer } from "../lib/printer";
 import { fromString } from "../lib/lines";
+import { getLineTerminator } from "../lib/util";
 import assert from "assert";
-import { EOL as eol } from "os";
+
+const eol = getLineTerminator();
 
 const annotated = [
   "function dup(/* string */ s,",

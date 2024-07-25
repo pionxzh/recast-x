@@ -8,7 +8,9 @@ import { fromString } from "../lib/lines";
 import { parse } from "../lib/parser";
 import * as flowParser from "../parsers/flow";
 import FastPath from "../lib/fast-path";
-import { EOL as eol } from "os";
+import { getLineTerminator } from "../lib/util";
+
+const eol = getLineTerminator();
 
 const code = [
   "// file comment",

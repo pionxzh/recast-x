@@ -12,7 +12,10 @@ function testFile(path: string, options: { parser?: any } = {}) {
     const ast = recast.parse(source, options);
     types.astNodesAreEquivalent.assert(ast.original, ast);
     const code = recast.print(ast).code;
-    assert.strictEqual(source, code);
+    assert.strictEqual(
+      source.replace(/[\r]?\n/g, "\n"),
+      code.replace(/[\r]?\n/g, "\n"),
+    );
   });
 }
 

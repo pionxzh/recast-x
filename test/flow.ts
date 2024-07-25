@@ -1,8 +1,10 @@
 import assert from "assert";
 import { parse } from "../lib/parser";
 import { Printer } from "../lib/printer";
+import { getLineTerminator } from "../lib/util";
 import * as types from "ast-types";
-import { EOL as eol } from "os";
+
+const eol = getLineTerminator();
 
 describe("type syntax", function () {
   const printer = new Printer({

@@ -1,9 +1,11 @@
 "use strict";
 
 import * as parser from "../parsers/babel-ts";
-import { EOL as eol } from "os";
 import * as recast from "../main";
+import { getLineTerminator } from "../lib/util";
 import assert from "assert";
+
+const eol = getLineTerminator();
 
 describe("Babel TSX Compatibility", function () {
   function check(lines: string[]) {

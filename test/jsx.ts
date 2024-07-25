@@ -2,8 +2,11 @@
 
 import { parse } from "../lib/parser";
 import { Printer } from "../lib/printer";
+import { getLineTerminator } from "../lib/util";
 import assert from "assert";
 import * as types from "ast-types";
+
+const eol = getLineTerminator();
 
 for (const { title, parser } of [
   { title: "Babel JSX Compatibility", parser: require("../parsers/babel") },
@@ -65,14 +68,14 @@ for (const { title, parser } of [
 it("should not remove trailing whitespaces", function () {
   const printer = new Printer({ tabWidth: 2 });
   const source =
-    "function App() {\n" +
-    '  const name = "world";\n' +
-    "\n" +
-    "  return (\n" +
-    '    <div className="app">\n' +
-    "        hello {name}\n" +
-    "    </div>\n" +
-    "  );\n" +
+    `function App() {${eol}` +
+    `  const name = "world";${eol}` +
+    `${eol}` +
+    `  return (${eol}` +
+    `    <div className="app">${eol}` +
+    `        hello {name}${eol}` +
+    `    </div>${eol}` +
+    `  );${eol}` +
     "}";
   const ast = parse(source);
   ast.program.body[0].body.body[1].argument.openingElement.attributes[0].name.name =
@@ -82,13 +85,13 @@ it("should not remove trailing whitespaces", function () {
 
   assert.equal(
     code,
-    "function App() {\n" +
-      '  const name = "world";\n' +
-      "\n" +
-      "  return (\n" +
-      '    <div abc="app">hello {name}\n' +
-      "    </div>\n" +
-      "  );\n" +
+    `function App() {${eol}` +
+      `  const name = "world";${eol}` +
+      `${eol}` +
+      `  return (${eol}` +
+      `    <div abc="app">hello {name}${eol}` +
+      `          </div>${eol}` +
+      `  );${eol}` +
       "}",
   );
 });

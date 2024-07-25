@@ -1,8 +1,10 @@
 import assert from "assert";
-import { EOL as eol } from "os";
 import * as recast from "../main";
+import { getLineTerminator } from "../lib/util";
+
 const n = recast.types.namedTypes;
 const b = recast.types.builders;
+const eol = getLineTerminator();
 
 describe("Babel", function () {
   const babelTransform = require("@babel/core").transform;
@@ -293,9 +295,7 @@ describe("Babel", function () {
   });
 
   it("should not print delimiters with type annotations", function () {
-    const code = ["type X = {", "  a: number,", "  b: number,", "};"].join(
-      "\n",
-    );
+    const code = ["type X = {", "  a: number,", "  b: number,", "};"].join(eol);
 
     const ast = recast.parse(code, parseOptions);
     const root = new recast.types.NodePath(ast);
@@ -328,7 +328,7 @@ describe("Babel", function () {
   });
 
   it("should be able to replace top-level statements with leading empty lines", function () {
-    const code = ["", "if (test) {", "  console.log(test);", "}"].join("\n");
+    const code = ["", "if (test) {", "  console.log(test);", "}"].join(eol);
 
     const ast = recast.parse(code, parseOptions);
 
@@ -341,7 +341,7 @@ describe("Babel", function () {
 
     ast.program.body[0] = replacement;
 
-    assert.strictEqual(recast.print(ast).code, "\nfn(test, true);");
+    assert.strictEqual(recast.print(ast).code, `${eol}fn(test, true);`);
 
     recast.types.visit(ast, {
       visitIfStatement: function (path: any) {
@@ -350,7 +350,7 @@ describe("Babel", function () {
       },
     });
 
-    assert.strictEqual(recast.print(ast).code, "\nfn(test, true);");
+    assert.strictEqual(recast.print(ast).code, `${eol}fn(test, true);`);
   });
 
   it("should parse and print dynamic import(...)", function () {
@@ -474,7 +474,7 @@ describe("Babel", function () {
 
     assert.strictEqual(
       recast.print(ast, { quote: "single" }).code,
-      `'use strict';\nconst a = 1;`,
+      `'use strict';${eol}const a = 1;`,
     );
   });
 

@@ -1,13 +1,14 @@
 import assert from "assert";
 import * as types from "ast-types";
-import { EOL as eol } from "os";
 import { fromString } from "../lib/lines";
 import { parse } from "../lib/parser";
 import { Printer } from "../lib/printer";
+import { getLineTerminator } from "../lib/util";
 import * as recast from "../main";
 const n = types.namedTypes;
 const b = types.builders;
 const linesModule = require("../lib/lines");
+const eol = getLineTerminator();
 
 import * as tsParser from "../parsers/typescript";
 

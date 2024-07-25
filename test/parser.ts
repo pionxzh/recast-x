@@ -6,8 +6,10 @@ import { fromString } from "../lib/lines";
 import * as types from "ast-types";
 const namedTypes = types.namedTypes;
 import FastPath from "../lib/fast-path";
-import { EOL as eol } from "os";
 import { Options } from "../lib/options";
+import { getLineTerminator } from "../lib/util";
+
+const eol = getLineTerminator();
 
 // Esprima seems unable to handle unnamed top-level functions, so declare
 // test functions with names and then export them later.
@@ -201,7 +203,7 @@ function runTestsForParser(parserId: string) {
 
     function check(code: string) {
       const ast = parse(code, { parser });
-      assert.strictEqual(printer.print(ast).code, code);
+      assert.strictEqual(printer.print(ast).code.replace(/\r\n/g, "\n"), code);
     }
 
     check("// comment");

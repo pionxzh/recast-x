@@ -8,7 +8,7 @@ export interface Options {
   /**
    * If you want to use a different branch of esprima, or any other module
    * that supports a .parse function, pass that module object to
-   * recast.parse as options.parser (legacy synonym: options.esprima).
+   * recast.parse as options.parser.
    * @default require("recast/parsers/babel")
    */
   parser?: any;

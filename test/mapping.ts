@@ -8,7 +8,9 @@ const NodePath = types.NodePath;
 import { fromString } from "../lib/lines";
 import { parse } from "../lib/parser";
 import { Printer } from "../lib/printer";
-import { EOL as eol } from "os";
+import { getLineTerminator } from "../lib/util";
+
+const eol = getLineTerminator();
 
 describe("source maps", function () {
   it("should generate correct mappings", function () {
