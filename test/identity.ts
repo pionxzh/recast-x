@@ -3,8 +3,9 @@ import fs from "fs";
 import path from "path";
 import * as types from "ast-types";
 import * as recast from "../main";
+import * as parser from "../parsers/esprima";
 
-function testFile(path: string, options: { parser?: any } = {}) {
+function testFile(path: string, options: { parser: any } = { parser }) {
   fs.readFile(path, "utf-8", function (err, source) {
     assert.equal(err, null);
     assert.strictEqual(typeof source, "string");

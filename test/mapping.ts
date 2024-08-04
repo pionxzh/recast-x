@@ -8,6 +8,7 @@ const NodePath = types.NodePath;
 import { fromString } from "../lib/lines";
 import { parse } from "../lib/parser";
 import { Printer } from "../lib/printer";
+import * as parser from "../parsers/esprima";
 import { getLineTerminator } from "../lib/util";
 
 const eol = getLineTerminator();
@@ -19,6 +20,7 @@ describe("source maps", function () {
     fromString(code);
     const ast = parse(code, {
       sourceFileName: "source.js",
+      parser,
     });
 
     const path = new NodePath(ast);
@@ -127,6 +129,7 @@ describe("source maps", function () {
 
     const ast = parse(code, {
       sourceFileName: "original.js",
+      parser,
     });
 
     const useStrictResult = new Printer({
@@ -135,6 +138,7 @@ describe("source maps", function () {
 
     const useStrictAst = parse(useStrictResult.code, {
       sourceFileName: "useStrict.js",
+      parser,
     });
 
     const oneStepResult = new Printer({
@@ -174,7 +178,7 @@ describe("source maps", function () {
   it("should work when a child node becomes null", function () {
     // https://github.com/facebook/regenerator/issues/103
     const code = ["for (var i = 0; false; i++)", "  log(i);"].join(eol);
-    const ast = parse(code);
+    const ast = parse(code, { parser });
     const path = new NodePath(ast);
 
     const updatePath = path.get("program", "body", 0, "update");
@@ -193,6 +197,7 @@ describe("source maps", function () {
     const source = "foo();";
     const ast = recast.parse(source, {
       sourceFileName: "foo.js",
+      parser,
     });
 
     assert.strictEqual(ast.program.body.length, 1);

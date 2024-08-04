@@ -6,10 +6,8 @@ import { getLineTerminator } from "./util";
  */
 export interface Options {
   /**
-   * If you want to use a different branch of esprima, or any other module
-   * that supports a .parse function, pass that module object to
-   * recast.parse as options.parser.
-   * @default require("recast/parsers/babel")
+   * Any other module that supports a .parse function
+   * pass that module object to recast.parse as options.parser.
    */
   parser?: any;
 
@@ -201,7 +199,7 @@ export function normalize(opts?: Options): NormalizedOptions {
     sourceMapName: get("sourceMapName"),
     sourceRoot: get("sourceRoot"),
     inputSourceMap: get("inputSourceMap"),
-    parser: get("parser") || require("../parsers/esprima"),
+    parser: get("parser"),
     range: get("range"),
     tolerant: get("tolerant"),
     quote: get("quote"),

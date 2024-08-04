@@ -1,16 +1,21 @@
 import assert from "assert";
 import * as types from "ast-types";
 import { fromString } from "../lib/lines";
-import { parse } from "../lib/parser";
+import { parse as _parse } from "../lib/parser";
 import { Printer } from "../lib/printer";
-import { getLineTerminator } from "../lib/util";
 import * as recast from "../main";
+import { getLineTerminator } from "../lib/util";
 const n = types.namedTypes;
 const b = types.builders;
 const linesModule = require("../lib/lines");
 const eol = getLineTerminator();
 
+import * as parser from "../parsers/esprima";
 import * as tsParser from "../parsers/typescript";
+
+const parse = (source: string, options: Partial<recast.Options> = {}) => {
+  return _parse(source, { parser, ...options });
+};
 
 describe("printer", function () {
   it("Printer", function testPrinter(done) {
@@ -2024,7 +2029,7 @@ describe("printer", function () {
 
   it("adds parenthesis around conditional", function () {
     const code = "new (typeof a ? b : c)();";
-    const callee = recast.parse("typeof a ? b : c").program.body[0].expression;
+    const callee = recast.parse("typeof a ? b : c", { parser }).program.body[0].expression;
 
     const newExpression = b.newExpression(callee, []);
 

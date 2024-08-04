@@ -747,7 +747,7 @@ function runTestsForParser(parserId: any) {
   pit("should correctly handle a lonesome comment (alt 1)", function () {
     const code = ["", "// boo", ""].join(eol);
 
-    const ast = recast.parse(code);
+    const ast = recast.parse(code, { parser });
 
     assert.strictEqual(recast.print(ast).code, ["", "// boo", ""].join(eol));
   });
@@ -757,7 +757,7 @@ function runTestsForParser(parserId: any) {
     function () {
       const code = ["", "// boo ", ";"].join(eol);
 
-      const ast = recast.parse(code);
+      const ast = recast.parse(code, { parser });
 
       assert.strictEqual(
         recast.print(ast).code,
@@ -771,7 +771,7 @@ function runTestsForParser(parserId: any) {
     function () {
       const code = ["", "// boo ", ""].join(eol);
 
-      const ast = recast.parse(code);
+      const ast = recast.parse(code, { parser });
 
       assert.strictEqual(recast.print(ast).code, ["", "// boo ", ""].join(eol));
     },

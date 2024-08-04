@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs";
 import * as recast from "../main";
+import * as parser from "../parsers/esprima";
 
 const source = fs.readFileSync(
   path.join(__dirname, "data", "backbone.js"),
@@ -8,7 +9,7 @@ const source = fs.readFileSync(
 );
 
 const start = +new Date();
-const ast = recast.parse(source);
+const ast = recast.parse(source, { parser});
 const types = Object.create(null);
 
 const parseTime = +new Date() - start;

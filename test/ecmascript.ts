@@ -1,6 +1,7 @@
 import assert from "assert";
 import { parse } from "../lib/parser";
 import { Printer } from "../lib/printer";
+import * as parser from "../parsers/esprima";
 import { getLineTerminator } from "../lib/util";
 import * as types from "ast-types";
 
@@ -8,7 +9,7 @@ const n = types.namedTypes;
 const b = types.builders;
 const eol = getLineTerminator();
 
-describe("ES6 Compatability", function () {
+describe("ES6 Compatibility", function () {
   function convertShorthandMethod() {
     const printer = new Printer({ tabWidth: 2 });
 
@@ -20,7 +21,7 @@ describe("ES6 Compatability", function () {
       "};",
     ].join(eol);
 
-    const ast = parse(code);
+    const ast = parse(code, { parser });
     n.VariableDeclaration.assert(ast.program.body[1]);
 
     const shorthandObjDec = ast.program.body[1].declarations[0].init;
@@ -57,7 +58,7 @@ describe("ES6 Compatability", function () {
   function respectDestructuringAssignment() {
     const printer = new Printer({ tabWidth: 2 });
     const code = "var {a} = {};";
-    const ast = parse(code);
+    const ast = parse(code, { parser });
     n.VariableDeclaration.assert(ast.program.body[0]);
     assert.strictEqual(printer.print(ast).code, code);
   }
@@ -69,8 +70,8 @@ describe("import/export syntax", function () {
   const printer = new Printer({ tabWidth: 2 });
 
   function check(source: string) {
-    const ast1 = parse(source);
-    const ast2 = parse(printer.printGenerically(ast1).code);
+    const ast1 = parse(source, { parser });
+    const ast2 = parse(printer.printGenerically(ast1).code, { parser });
     types.astNodesAreEquivalent.assert(ast1, ast2);
   }
 
@@ -141,7 +142,7 @@ describe("import/export syntax", function () {
   it("should forbid invalid import/export syntax", function () {
     function checkInvalid(source: string, expectedMessage: string) {
       try {
-        parse(source);
+        parse(source, { parser });
         throw new Error(
           "Parsing should have failed: " + JSON.stringify(source),
         );
@@ -233,7 +234,7 @@ describe("import/export syntax", function () {
       "var t = tag`You said: ${s}!`;",
     ].join(eol);
 
-    const ast = parse(code);
+    const ast = parse(code, { parser });
 
     assert.strictEqual(
       new Printer({

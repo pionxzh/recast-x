@@ -77,7 +77,7 @@ it("should not remove trailing whitespaces", function () {
     `    </div>${eol}` +
     `  );${eol}` +
     "}";
-  const ast = parse(source);
+  const ast = parse(source, { parser: require("../parsers/esprima") });
   ast.program.body[0].body.body[1].argument.openingElement.attributes[0].name.name =
     "abc";
 

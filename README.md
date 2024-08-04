@@ -5,7 +5,7 @@
 This is a fork with changes to make it slim.
 
 - Removed CLI interface
-- Removed `babylon` fallback
+- Removed `babylon` fallback and default parser
 - Use patched version of `ast-types`([ast-type-x](https://github.com/pionxzh/ast-types-x)). They fixed some bugs, merged some PRs and added some features since the original repo is not actively maintained.
 
 ---

@@ -4,6 +4,7 @@ const namedTypes = types.namedTypes;
 const builders = types.builders;
 import { parse } from "../lib/parser";
 import { Printer } from "../lib/printer";
+import * as parser from "../parsers/esprima";
 import { getLineTerminator } from "../lib/util";
 
 const eol = getLineTerminator();
@@ -21,7 +22,7 @@ describe("types.visit", function () {
   it("replacement", function () {
     const source = lines.join(eol);
     const printer = new Printer();
-    const ast = parse(source);
+    const ast = parse(source, { parser });
     const withThis = printer.print(ast).code;
     const thisExp = /\bthis\b/g;
 
@@ -101,7 +102,7 @@ describe("types.visit", function () {
     ];
 
     const source = lines.join(eol);
-    const ast = parse(source);
+    const ast = parse(source, { parser });
     const printer = new Printer();
 
     let funExpr: any;

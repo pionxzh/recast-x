@@ -1,14 +1,20 @@
 import assert from "assert";
 import * as esprima from "esprima";
-import { parse } from "../lib/parser";
 import { Printer } from "../lib/printer";
+import * as parser from "../parsers/esprima";
+import { parse as _parse } from "../lib/parser";
 import { getLineTerminator } from "../lib/util";
 import * as types from "ast-types";
+import type { Options } from "../main";
 
 const eol = getLineTerminator();
 
 const printer = new Printer();
 const { namedTypes: n, builders: b, NodePath } = types;
+
+const parse = (source: string, options: Partial<Options> = {}) => {
+  return _parse(source, { parser, ...options });
+};
 
 function parseExpression(expr: any) {
   let ast: any = esprima.parse(expr);

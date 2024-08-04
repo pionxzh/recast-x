@@ -5,10 +5,15 @@ const n = types.namedTypes;
 const b = types.builders;
 import { getReprinter, Patcher } from "../lib/patcher";
 import { fromString } from "../lib/lines";
-import { parse } from "../lib/parser";
+import { parse as _parse } from "../lib/parser";
+import * as parser from "../parsers/esprima";
 import * as flowParser from "../parsers/flow";
 import FastPath from "../lib/fast-path";
 import { getLineTerminator } from "../lib/util";
+
+const parse = (source: string, options: Partial<recast.Options> = {}) => {
+  return _parse(source, { parser, ...options });
+};
 
 const eol = getLineTerminator();
 
