@@ -26,6 +26,7 @@
     "mocha": "test/run.sh",
     "debug": "test/run.sh --inspect-brk",
     "test": "npm run lint && npm run build && npm run mocha",
+    "run-test": "mocha --reporter spec --full-trace test/run.js",
     "build": "npm run clean && tsc",
     "lint": "eslint --ext .ts .",
     "format": "prettier --write .",
