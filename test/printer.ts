@@ -2029,7 +2029,8 @@ describe("printer", function () {
 
   it("adds parenthesis around conditional", function () {
     const code = "new (typeof a ? b : c)();";
-    const callee = recast.parse("typeof a ? b : c", { parser }).program.body[0].expression;
+    const callee = recast.parse("typeof a ? b : c", { parser }).program.body[0]
+      .expression;
 
     const newExpression = b.newExpression(callee, []);
 

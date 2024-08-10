@@ -9,7 +9,7 @@ const source = fs.readFileSync(
 );
 
 const start = +new Date();
-const ast = recast.parse(source, { parser});
+const ast = recast.parse(source, { parser });
 const types = Object.create(null);
 
 const parseTime = +new Date() - start;
