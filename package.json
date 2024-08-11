@@ -1,7 +1,7 @@
 {
   "name": "recast-x",
   "author": "Pionxzh",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "packageManager": "pnpm@8.15.7",
   "description": "JavaScript syntax tree transformer, nondestructive pretty-printer, and automatic source map generator",
   "keywords": [
