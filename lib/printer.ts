@@ -838,6 +838,7 @@ function genericPrintNoParens(path: any, options: any, print: any) {
       return printMethod(path, options, print);
 
     case "PrivateName":
+    case "PrivateIdentifier":
       return concat(["#", path.call(print, "id")]);
 
     case "Decorator":
